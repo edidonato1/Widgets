@@ -27,3 +27,12 @@ switch (true) {
     suffix = 'th';
 }
 
+const makeTimeArray = d => {
+  let hours = d.getHours() >= 13 ? d.getHours() - 12 : d.getHours();
+  let minutes = d.getMinutes();
+  let left = hours.toString().split('').map(s => Number(s));
+  let right = minutes.toString().split('').map(s => Number(s));
+  return [...left, 10, ...right]
+}
+
+export let timeArray = makeTimeArray(d);
