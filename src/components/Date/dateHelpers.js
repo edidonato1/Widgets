@@ -28,11 +28,13 @@ switch (true) {
 }
 
 const makeTimeArray = d => {
-  let hours = d.getHours() >= 13 ? d.getHours() - 12 : d.getHours();
-  let minutes = d.getMinutes();
-  let left = hours.toString().split('').map(s => Number(s));
-  let right = minutes.toString().split('').map(s => Number(s));
+  let hours = d.getHours() >= 13 ? (d.getHours() - 12) : d.getHours();
+  let minutes = d.getMinutes().toString();
+  let left = hours.toString().split('').map(n => Number(n));
+  let right = minutes < 10 ? [0, minutes] : minutes.toString().split('').map(n => Number(n))
   return [...left, 10, ...right]
 }
 
 export let timeArray = makeTimeArray(d);
+
+export let seconds = d.getSeconds();

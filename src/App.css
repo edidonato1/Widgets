@@ -32,7 +32,7 @@
 .block {
   width: 10px;
   height: 10px;
-  box-shadow: 2px 2px gray;
+  box-shadow: 1px 1px gray;
 }
 
 .on {
