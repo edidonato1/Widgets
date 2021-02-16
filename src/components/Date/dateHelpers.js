@@ -7,6 +7,7 @@ let months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'a
 
 export let day = days[d.getDay()]; 
 export let month = months[d.getMonth()];
+export let seconds = d.getSeconds();
 export let date = d.getDate();
 export let suffix = '';
   
@@ -27,14 +28,4 @@ switch (true) {
     suffix = 'th';
 }
 
-const makeTimeArray = d => {
-  let hours = d.getHours() >= 13 ? (d.getHours() - 12) : d.getHours();
-  let minutes = d.getMinutes().toString();
-  let left = hours.toString().split('').map(n => Number(n));
-  let right = minutes < 10 ? [0, minutes] : minutes.toString().split('').map(n => Number(n))
-  return [...left, 10, ...right]
-}
 
-export let timeArray = makeTimeArray(d);
-
-export let seconds = d.getSeconds();

@@ -1,5 +1,5 @@
 import { numbers } from './numbers';
-import { timeArray, seconds } from '../../components/Date/dateHelpers';
+import { seconds } from '../../components/Date/dateHelpers';
 import { useEffect, useState } from 'react';
 
 
