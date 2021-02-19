@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
 import { ClockContainer, SelectStyles } from './ClockStyles';
 import { numbers } from './numbers';
-import {colorArray} from './colors';
+import { colorArray } from './colors';
 import { seconds } from '../../components/Date/dateHelpers';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPalette } from '@fortawesome/free-solid-svg-icons';
+
 
 
 export default function Clock() {
   const [timeArr, setTime] = useState([]);
   const [am, setAm] = useState();
-  const [clockColor, setClockColor] = useState('ffffff');
+  const [clockColor, setClockColor] = useState('#77ff41');
+  const [showColors, setShowColors] = useState(false);
 
 
   useEffect(() => {
@@ -63,16 +67,21 @@ export default function Clock() {
             <p className={!am ? "light-up" : null}>pm</p>
           </div>
         </div>
-      </ClockContainer>
-      <SelectStyles>
-        {colorArray.map(c => 
-          <div
-            className="color-picker"
-            style={{ background: c }}
-            onClick={() => setClockColor(c)}
-          ></div>
+        <SelectStyles showColors={showColors}>
+          <FontAwesomeIcon icon={faPalette} className="color-picker" onClick={() => setShowColors(!showColors)} />
+          {colorArray.map(c =>
+              <FontAwesomeIcon
+                icon={faPalette}
+                className="color-picker"
+                style={{ color: c, zIndex: clockColor === c ? "1" : "0" }}
+                onClick={() => {
+                  setShowColors(true)
+                  setClockColor(c)
+                }}
+              />
           )}
       </SelectStyles>
+      </ClockContainer>
     </>
   )
 }

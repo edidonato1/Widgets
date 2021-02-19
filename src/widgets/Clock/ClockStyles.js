@@ -8,6 +8,7 @@ export const ClockContainer = styled.div`
   background: #212121;
   border-radius: 30px;
   box-shadow: inset 0px 0px 10px ${({ clockColor }) => clockColor};
+
   transition: .8s;
   * {
     transition: .8s;
@@ -67,7 +68,9 @@ export const ClockContainer = styled.div`
     text-shadow: inset 1px 1px black;
     font-family: 'Space Mono';
     letter-spacing: 2px;
+
   }
+
 
 
 
@@ -82,10 +85,17 @@ export const ClockContainer = styled.div`
 
 export const SelectStyles = styled.div`
 display: flex;
+width: 100%;
+width: 20px;
+margin-top: 10px;
+margin-bottom: -5px;
+margin: 10px 0px -5px 5px;
 
-  .color-picker {
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
-  }
+.color-picker  {
+  font-size: 20px;
+  border-radius: 10px;
+  margin: ${({showColors}) => showColors ? "0 5px" : "0 -10px"};
+}
+
+
 `
