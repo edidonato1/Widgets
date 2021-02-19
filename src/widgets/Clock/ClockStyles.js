@@ -7,8 +7,11 @@ export const ClockContainer = styled.div`
   border: 3px solid black;
   background: #212121;
   border-radius: 30px;
-  box-shadow: inset 0px 0px 10px #35a3a3;
-
+  box-shadow: inset 0px 0px 10px ${({ clockColor }) => clockColor};
+  transition: .8s;
+  * {
+    transition: .8s;
+  }
   
   #clock-skew {
     transform: skewX(-7deg);
@@ -48,7 +51,7 @@ export const ClockContainer = styled.div`
   }
 
   .on {
-    background: #35a3a3;
+    background: ${({ clockColor }) => clockColor};
   }
 
   .off {
@@ -69,7 +72,7 @@ export const ClockContainer = styled.div`
 
 
   .light-up {
-    color: #35a3a3;
+    color: ${({ clockColor }) => clockColor};
     text-shadow: 0px 0px  1px lightgray;
   }
 
@@ -77,4 +80,12 @@ export const ClockContainer = styled.div`
 `
 
 
+export const SelectStyles = styled.div`
+display: flex;
 
+  .color-picker {
+    height: 50px;
+    width: 50px;
+    border-radius: 10px;
+  }
+`
