@@ -2,10 +2,9 @@ import { useEffect, useState } from 'react';
 import { ClockContainer, SelectStyles } from './ClockStyles';
 import { numbers } from './numbers';
 import { colorArray } from './colors';
-import { seconds } from '../../components/Date/dateHelpers';
+import { seconds, makeTimeArray } from '../../components/Date/dateHelpers';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPalette } from '@fortawesome/free-solid-svg-icons';
-
 
 
 export default function Clock() {
@@ -19,31 +18,14 @@ export default function Clock() {
     // when component mounts, set time
     setTime(makeTimeArray(new Date()))
     // set time again at start of next minute to ensure accuracy
-    setTimeout((() => setTime(makeTimeArray(new Date))), (60 - seconds) * 1000)
+    setTimeout((() => setTime(makeTimeArray(new Date(), setAm))), (60 - seconds) * 1000)
     setAm(new Date().getHours() >= 13 ? false : true)
   }, [clockColor]);
 
   useEffect(() => {
     // when clock refreshes, return interval to update component every minute
-    setInterval((() => setTime(makeTimeArray(new Date()))), 60000)
+    setInterval((() => setTime(makeTimeArray(new Date(), setAm))), 60000)
   }, [timeArr]);
-
-  const makeTimeArray = d => {
-    let h = d.getHours();
-    let m = d.getMinutes();
-    let hours = d.getHours() >= 13 ? (h - 12) : h;
-    if (m % 60 === 0) {
-      setAm(h >= 13 ? false : true) // only look to reset am/pm toggle at each hour
-    }
-    let minutes = d.getMinutes().toString();
-    let left = hours < 10 ? [11, hours] : hours.toString().split('').map(n => Number(n));
-    let right = minutes < 10 ? [0, minutes] : minutes.toString().split('').map(n => Number(n))
-    return [...left, 10, ...right]
-  }
-
-  const handleClick = () => {
-    // setClockColor(colors.coral)
-  }
 
 
   return (
@@ -73,7 +55,7 @@ export default function Clock() {
               <FontAwesomeIcon
                 icon={faPalette}
                 className="color-picker"
-                style={{ color: c, zIndex: clockColor === c ? "1" : "0" }}
+                style={{ color: c, zIndex: clockColor === c ? "1" : "0" }} // selected color always on top
                 onClick={() => {
                   setShowColors(true)
                   setClockColor(c)
