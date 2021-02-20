@@ -7,6 +7,6 @@ function App() {
       <Clock />
     </div>
   );
-}
+};
 
 export default App;
